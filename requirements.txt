@@ -8,3 +8,6 @@ pymongo[srv]
 motor
 pyyaml
 python-dotenv
+ragas
+pandas
+datasets

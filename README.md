@@ -109,6 +109,49 @@ curl -X POST "http://localhost:8000/chatbot/api/vectorSearch" \
 
 ---
 
+## 📊 RAG 評估系統 (Context Precision)
+
+專案內建了一套基於 **Ragas** 概念的檢索精準度評估工具，位於 `evaluation/knowledge/ContextPrecision/`。該工具專注於測試「向量搜尋是否撈回了真正相關的資料」，且 **不需要標準答案 (Ground Truth)**。
+
+### 1. 三階段資料集設計
+| 階段 | 檔案名稱 | 內容 |
+| :--- | :--- | :--- |
+| **第一階段** | `stage1_questions.json` | 包含 20 題模擬股市檢索的問題（如台積電毛利、ASML 預測等）。 |
+| **第二階段** | `stage2_retrieved.json` | 執行檢索腳本後，記錄下每一題拿回來的 Top-K 文本片段。 |
+| **第三階段** | `stage3_evaluated.json` | 讓 LLM (GPT-4o) 擔任裁判，為每一片段給出「相關性判斷」與「具體評語」，並計算總分。 |
+
+### 2. 如何執行評估
+請確保伺服器環境變數 (.env) 已設定完成，且資料庫中有對應資料。
+
+**第一步：執行向量檢索 (製作第二階段資料)**
+```bash
+python evaluation/knowledge/ContextPrecision/step1_retrieve.py
+```
+> 您可以在腳本中調整 `TOP_K` 變數來測試不同的檢索數量對精準度的影響。
+
+**第二步：執行 LLM 閱卷 (製作第三階段評分報告)**
+
+執行以下指令啟動 AI 評分：
+```bash
+python evaluation/knowledge/ContextPrecision/step2_evaluate.py
+```
+
+*   **評分模式**: 採用 **Without Ground Truth (無須標準答案)** 模式，直接由 GPT-4o 判斷相關性。
+*   **核心優勢**: 
+    1. **極度穩定**: 自定義評核邏輯，不受第三方套件 (如 Ragas) 版本更新導致的 API 變動影響。
+    2. **具備詳細評語 (Reason)**: 這是本系統最強大的地方。AI 會針對每一條檢索資料給出「為什麼相關」或「為什麼是無用雜訊」的具體理由，協助開發者精準優化 Embedding 與 Chunking 策略。
+*   **輸出檔案**: `evaluation/knowledge/ContextPrecision/dataset/stage3_evaluated.json`。
+
+### 3. 評估指標定義
+
+*   **Context Precision (檢索精準度)**: 衡量檢索出的 K 筆資料中，真正與問題相關（對回答有幫助）的資料比例。
+*   此系統能協助診斷：
+    2. Top-K 設定是否過大導致雜訊過多？
+    3. $vectorSearch 的過濾器是否運作正常？
+
+---
+
 ## 📝 開發筆記
 - **ObjectId 處理**: 由於 MongoDB 回傳的 `_id` 是物件格式，專案使用 `convert_doc` 函式遞迴將其轉為字串，確保 FastAPI 輸出時不會報錯。
 - **去重鍵值**: 去重邏輯採用 `"collection:id"` 格式，確保在跨集合檢索時資料的唯一性。
+- **自動化評估**: 獨立的評估腳本設計，不干擾主 API 運行，適合整合進 CI/CD 或開發週期的品質檢查。
