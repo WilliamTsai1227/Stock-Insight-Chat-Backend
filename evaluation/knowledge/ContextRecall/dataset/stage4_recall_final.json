@@ -1,0 +1,125 @@
+{
+  "overall_context_recall": 0.7144917582417583,
+  "detail_results": [
+    {
+      "question": "台積電 2026 年第一季的毛利率表現如何？",
+      "target_relevant_count": 0,
+      "system_retrieved_relevant_count": 0,
+      "recall_score": 1.0
+    },
+    {
+      "question": "志聖 2026 年 1-2 月的累計營收成長率是多少？",
+      "target_relevant_count": 3,
+      "system_retrieved_relevant_count": 3,
+      "recall_score": 1.0
+    },
+    {
+      "question": "目前半導體封裝測試產業的最新發展趨勢是什麼？",
+      "target_relevant_count": 15,
+      "system_retrieved_relevant_count": 5,
+      "recall_score": 0.3333333333333333
+    },
+    {
+      "question": "輝達 (NVIDIA) 最近對 AI 伺服器散熱市場有什麼展望？",
+      "target_relevant_count": 1,
+      "system_retrieved_relevant_count": 0,
+      "recall_score": 0.0
+    },
+    {
+      "question": "廣達對於 AI 筆電的需求預期有調整嗎？",
+      "target_relevant_count": 0,
+      "system_retrieved_relevant_count": 0,
+      "recall_score": 1.0
+    },
+    {
+      "question": "美國政府對 Anthropic 的採購禁令具體內容是什麼？",
+      "target_relevant_count": 14,
+      "system_retrieved_relevant_count": 5,
+      "recall_score": 0.35714285714285715
+    },
+    {
+      "question": "散熱大廠雙鴻在水冷技術上的佈局進度？",
+      "target_relevant_count": 4,
+      "system_retrieved_relevant_count": 4,
+      "recall_score": 1.0
+    },
+    {
+      "question": "荷姆茲海峽航運停擺對全球油價的具體影響？",
+      "target_relevant_count": 20,
+      "system_retrieved_relevant_count": 5,
+      "recall_score": 0.25
+    },
+    {
+      "question": "聯發科在 MWC 展會上發表了哪些 AI 晶片技術？",
+      "target_relevant_count": 4,
+      "system_retrieved_relevant_count": 4,
+      "recall_score": 1.0
+    },
+    {
+      "question": "台達電在人形機器人領域的佈局與徵才計畫？",
+      "target_relevant_count": 3,
+      "system_retrieved_relevant_count": 3,
+      "recall_score": 1.0
+    },
+    {
+      "question": "微軟與 OpenAI 的合作關係近期是否有潛在挑戰？",
+      "target_relevant_count": 9,
+      "system_retrieved_relevant_count": 3,
+      "recall_score": 0.3333333333333333
+    },
+    {
+      "question": "ASML 對於 2026 年半導體設備市場的預測？",
+      "target_relevant_count": 4,
+      "system_retrieved_relevant_count": 4,
+      "recall_score": 1.0
+    },
+    {
+      "question": "鴻海在電動車平台的最新量產進度？",
+      "target_relevant_count": 1,
+      "system_retrieved_relevant_count": 1,
+      "recall_score": 1.0
+    },
+    {
+      "question": "台灣 2 月份的出口數據中，電子零組件佔比是多少？",
+      "target_relevant_count": 0,
+      "system_retrieved_relevant_count": 0,
+      "recall_score": 1.0
+    },
+    {
+      "question": "伺服器殼廠勤誠的產能稼動率情況？",
+      "target_relevant_count": 0,
+      "system_retrieved_relevant_count": 0,
+      "recall_score": 1.0
+    },
+    {
+      "question": "低軌衛星關鍵零組件的供應鏈名單？",
+      "target_relevant_count": 8,
+      "system_retrieved_relevant_count": 3,
+      "recall_score": 0.375
+    },
+    {
+      "question": "摺疊手機軸承廠兆利與長盈的良率比較？",
+      "target_relevant_count": 0,
+      "system_retrieved_relevant_count": 0,
+      "recall_score": 1.0
+    },
+    {
+      "question": "美股超級財報週對台股科技股的連動效應分析？",
+      "target_relevant_count": 3,
+      "system_retrieved_relevant_count": 1,
+      "recall_score": 0.3333333333333333
+    },
+    {
+      "question": "CoWoS 封裝產能目前的缺口還有多少？",
+      "target_relevant_count": 0,
+      "system_retrieved_relevant_count": 0,
+      "recall_score": 1.0
+    },
+    {
+      "question": "記憶體報價在 2026 年第二季預計會上漲嗎？",
+      "target_relevant_count": 13,
+      "system_retrieved_relevant_count": 4,
+      "recall_score": 0.3076923076923077
+    }
+  ]
+}

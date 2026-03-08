@@ -146,8 +146,37 @@ python evaluation/knowledge/ContextPrecision/step2_evaluate.py
 
 *   **Context Precision (檢索精準度)**: 衡量檢索出的 K 筆資料中，真正與問題相關（對回答有幫助）的資料比例。
 *   此系統能協助診斷：
-    2. Top-K 設定是否過大導致雜訊過多？
-    3. $vectorSearch 的過濾器是否運作正常？
+    1. **噪訊佔比**: Top-K 設定是否過大導致雜訊過多？
+    2. **過濾器成效**: MongoDB `$vectorSearch` 的 `filter` 條件是否運作正常？
+
+---
+
+## 📈 RAG 評估系統 (Context Recall)
+
+位於 `evaluation/knowledge/ContextRecall/`。由於在現實中難以窮舉「所有」相關資料，本系統採用 **Top-K Approximation (近似召回率)** 策略。
+
+### 1. 評估策略
+我們假設 `Top-20` 的搜尋結果已經涵蓋了絕大部分的相關資訊（回憶集），並以此為基準，衡量系統實際使用的 `Top-5` 到底抓到了其中的百分之幾。
+
+### 2. 執行步驟
+**第一步：取得基準回憶集 (K=20)**
+```bash
+python evaluation/knowledge/ContextRecall/step1_get_top20.py
+```
+
+**第二步：LLM 自動標註與數據準備**
+```bash
+python evaluation/knowledge/ContextRecall/step2_prepare_data.py
+```
+*   此步驟會讓 GPT-4o 掃描 Top-20 資料，過濾出真正關鍵的片段作為 Ground Truth。
+*   同時蒐集系統實際會用的 Top-5 資料。
+
+**第三步：計算 Recall@5**
+```bash
+python evaluation/knowledge/ContextRecall/step3_evaluate_recall.py
+```
+*   **計算公式**: `Recall@5 = (Top-5 中的相關片段數) / (Top-20 中的相關片段總數)`。
+*   **輸出檔案**: `evaluation/knowledge/ContextRecall/dataset/stage4_recall_final.json`。
 
 ---
 
